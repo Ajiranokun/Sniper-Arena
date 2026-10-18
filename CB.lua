@@ -1,9 +1,25 @@
--- Custom Floating UI Script for CB Hub (Fixed Open/Drag Conflict & Rounded 4 Corners + Dark Red Stroke)
-local Players = game:GetService("Players")
+-- =========================================================
+-- CB HUB SECURITY CHECK (PC EXECUTION ONLY)
+-- =========================================================
 local UserInputService = game:GetService("UserInputService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- ตรวจสอบว่าเป็นแพลตฟอร์ม PC หรือไม่ (บล็อกตัวรันบนมือถือ/แท็บเล็ต)
+local isPC = (UserInputService.KeyboardEnabled and UserInputService.MouseEnabled) and not UserInputService.TouchEnabled
+
+if not isPC then
+    pcall(function()
+        LocalPlayer:Kick("\n[ CB Hub Security ]\nสคริปต์นี้รองรับการใช้งานบนคอมพิวเตอร์ (PC) เท่านั้น!")
+    end)
+    return -- ยกเลิกการรันสคริปต์ทันที
+end
+
+-- =========================================================
+-- MAIN SCRIPT (CB HUB ARENA)
+-- =========================================================
 local RunService = game:GetService("RunService")
 local TweenService = game:GetService("TweenService")
-local LocalPlayer = Players.LocalPlayer
 local Camera = workspace.CurrentCamera
 local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
 
